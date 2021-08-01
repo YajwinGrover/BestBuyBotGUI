@@ -10,16 +10,15 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file:///Users/webJars" />
+          <root url="file://$MODULE_DIR$/../../../webJars" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="file:///Users/webJars" />
+          <root url="file://$MODULE_DIR$/../../../webJars" />
         </SOURCES>
-        <jarDirectory url="file:///Users/webJars" recursive="false" />
-        <jarDirectory url="file:///Users/webJars" recursive="false" type="SOURCES" />
+        <jarDirectory url="file://$MODULE_DIR$/../../../webJars" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/../../../webJars" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Jauntium" level="application" />
   </component>
 </module>

@@ -3,6 +3,7 @@ import java.awt.*;
 
 
 public class SwingMain {
+	//All the fields needed to chack out are taken and stored here
 	static String Fname;
 	static String Lname;
 	static String address;
@@ -18,7 +19,7 @@ public class SwingMain {
 	static String url;
 	
 	public SwingMain() {
-
+		//For every input, it shows the new frame
 		JOptionPane.showMessageDialog(null, moddedJOp("Welcome to the Best Buy Bot(BBB).\nWe need to get your name, credit card information, and a few other details. \nPlease press ok to continue!"), "BestBuyBot", JOptionPane.PLAIN_MESSAGE);
 	String z;
 		z = JOptionPane.showInputDialog(null, moddedJOp("Please type the URL of the item you are trying to purchase"), "BestBuyBot", JOptionPane.PLAIN_MESSAGE);
@@ -67,7 +68,7 @@ public class SwingMain {
 	
 		   
 	}
-
+	//This puts images and colors and texts to make it look better
 	private JPanel moddedJOp(String text){
 		JPanel panel = new JPanel();
 		panel.setOpaque(true);

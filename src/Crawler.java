@@ -11,17 +11,23 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.*;
 
+/**
+ * This is the class that crawls throught the website using the
+ * jauntium and selenium libraries
+ */
 public class Crawler {
+
     public static Browser browser;
     public static WebDriverWait w;
-
+    //Makes the system scrape and open chrome
     public static Browser set() {
         System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
         browser = new Browser(new ChromeDriver());
         w = new WebDriverWait(browser.driver, 15);
         return browser;
     }
-
+    //This scrapes the page looking for the words Item is out of stock
+    //If not then we click the buy button
     public static Boolean inStock(String url) {
         browser.visit(url);
         Document doc = browser.doc;
@@ -35,7 +41,8 @@ public class Crawler {
             return false;
         }
     }
-
+    //This takes fills in all the text fields in the checkout area
+    //So that you can buy the item and it will be shipped to the address you specified
     public static Boolean checkout(String email, String phone, String cccard, String mm, String yyyy, String cvv, String fnu, String lnu, String house, String apt, String city, String state, String zip, String pwd) throws NotFound {
         browser.visit("https://www.bestbuy.com/cart");
         Document doc = browser.doc;
@@ -76,7 +83,7 @@ public class Crawler {
         doc.findFirst("<button class=\"btn btn-lg btn-block btn-primary\"").click();
         return true;
     }
-
+    //Testing method
     public static void main(String[] args) {
         // Testing
         Crawler.set();
