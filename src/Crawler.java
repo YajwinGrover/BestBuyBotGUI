@@ -38,7 +38,7 @@ public class Crawler {
         browser.visit("https://www.bestbuy.com/cart");
         Document doc = browser.doc;
         w.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("checkout-buttons__checkout")));
-        doc.findFirst("<div class=\"checkout-buttons__checkout\"").click();
+        doc.findFirst("<button class=\"btn btn-lg btn-block btn-primary\" type=\"button\"").click();
         browser.visit("https://www.bestbuy.com/identity/signin?token=tid%3A47f5d7c2-f263-11eb-90ae-005056ae2547");
         doc = browser.doc;
         w.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("btn btn-secondary btn-lg cia-guest-content__continue guest")));

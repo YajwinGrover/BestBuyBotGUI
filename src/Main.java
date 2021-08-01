@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
         SwingMain ui = new SwingMain();
         Crawler.set();
-        while (!Crawler.inStock(ui.url)) {
+        while (!Crawler.inStock(ui.url)) { // Check if item is in checkout
             ;
         }
         try {
