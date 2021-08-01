@@ -6,17 +6,17 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.regex.*;
 
 public class Crawler {
-    public static Browser scrape(String url) {
+    public static Browser browser;
+
+    public static Browser set() {
         System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
-        Browser browser = new Browser(new ChromeDriver());
-        browser.visit(url);
+        browser = new Browser(new ChromeDriver());
         return browser;
     }
 
     public static Boolean inStock(String url) {
-        Browser browser = scrape(url);
+        browser.visit(url);
         Document doc = browser.doc;
-        WebDriver driver = browser.driver;
         String button = "<button class=\"btn btn-primary btn-lg btn-block btn-leading-ficon add-to-cart-button\" type=\"button\"";
         try {
             doc.findFirst(button).click();
@@ -28,7 +28,23 @@ public class Crawler {
         }
     }
 
+    public static Boolean checkout(String email, String phone) throws NotFound {
+        browser.visit("https://www.bestbuy.com/cart");
+        Document doc = browser.doc;
+        doc.findFirst("<button class=\"btn btn-lg btn-block btn-primary\" type=\"button\"").click();
+        doc = browser.doc;
+        System.out.println(doc.innerHTML());
+        doc.findFirst("<button class=\"btn btn-secondary btn-lg cia-guest-content__continue guest\"").click();
+        return true;
+    }
+
     public static void main(String[] args) {
-        Crawler.inStock("https://www.bestbuy.com/site/nvidia-geforce-rtx-3090-24gb-gddr6x-pci-express-4-0-graphics-card-titanium-and-black/6429434.p?skuId=6429434");
+        Crawler.set();
+        Crawler.inStock("https://www.bestbuy.com/site/apple-macbook-pro-13-display-with-touch-bar-intel-core-i5-8gb-memory-512gb-ssd-space-gray/6287720.p?skuId=6287720");
+        try {
+            Crawler.checkout("null", "null");
+        } catch (NotFound e) {
+            e.printStackTrace();
+        }
     }
 }
