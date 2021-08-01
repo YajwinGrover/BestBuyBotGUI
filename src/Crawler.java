@@ -1,16 +1,22 @@
 import com.jauntium.*;
 import com.jauntium.Document;
 import com.jauntium.Element;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.util.regex.*;
 
 public class Crawler {
     public static Browser browser;
+    public static WebDriverWait w;
 
     public static Browser set() {
         System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
         browser = new Browser(new ChromeDriver());
+        w = new WebDriverWait(browser.driver, 500);
         return browser;
     }
 
@@ -31,17 +37,21 @@ public class Crawler {
     public static Boolean checkout(String email, String phone, String cccard, String mm, String yyyy, String cvv, String fnu, String lnu, String house, String apt, String city, String state, String zip, String pwd) throws NotFound {
         browser.visit("https://www.bestbuy.com/cart");
         Document doc = browser.doc;
+        w.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("btn btn-lg btn-block btn-primary")));
         doc.findFirst("<button class=\"btn btn-lg btn-block btn-primary\" type=\"button\"").click();
         browser.visit("https://www.bestbuy.com/identity/signin?token=tid%3A47f5d7c2-f263-11eb-90ae-005056ae2547");
         doc = browser.doc;
+        w.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("btn btn-secondary btn-lg cia-guest-content__continue guest")));
         doc.findFirst("<button class=\"btn btn-secondary btn-lg cia-guest-content__continue guest\"").click();
         browser.visit("https://www.bestbuy.com/checkout/r/fulfillment");
         doc = browser.doc;
+        w.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("btn btn-lg btn-block btn-secondary")));
         doc.findFirst("<input id=\"user.emailAddress\"").setAttribute("value", email);
         doc.findFirst("<input id=\"user.phone\"").setAttribute("value", phone);
         doc.findFirst("<button class=\"btn btn-lg btn-block btn-secondary\"").click();
         browser.visit("https://www.bestbuy.com/checkout/r/payment");
         doc = browser.doc;
+        w.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("optimized-cc-card-number")));
         System.out.println(browser.getLocation());
         doc.findFirst("<input id=\"optimized-cc-card-number\" type=\"tel\" maxlength=\"19\"").setAttribute("value", cccard);
         doc.findFirst("<option value=\"" + mm + "\"").setAttribute("selected", "");

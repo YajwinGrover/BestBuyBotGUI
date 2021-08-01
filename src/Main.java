@@ -1,6 +1,18 @@
+import com.jauntium.NotFound;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("test");
+        SwingMain ui = new SwingMain();
+        Crawler.set();
+        while (!Crawler.inStock(ui.url)) {
+            ;
+        }
+        try {
+            Crawler.checkout(ui.email, ui.phone, Long.toString(ui.cardNumber), Integer.toString(ui.exMonth), Integer.toString(ui.exYear), Integer.toString(ui.cvv), ui.Fname, ui.Lname, ui.address, null, ui.city, ui.state, Integer.toString(ui.zip), null);
+        } catch (NotFound e) {
+            System.out.println("Something went quite wrong.");
+            e.printStackTrace();
+        }
     }
 
 }
